@@ -14,3 +14,5 @@ const Explore = () => {
     </View>
   );
 };
+
+export default Explore;
