@@ -13,6 +13,14 @@ module.exports = {
         "rubik-semibold": ["Rubik-SemiBold", "sans-serif"],
       },
     },
+    colors: {
+      "primary": "#FF6A00",
+      "secondary": "#FFA400",
+      "tertiary": "#FFD700",
+      "dark": "#1A1A1A",
+      "light": "#F5F5F5",
+      "white": "#FFFFFF",
+
   },
   plugins: [],
 };
