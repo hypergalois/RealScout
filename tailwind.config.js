@@ -14,13 +14,21 @@ module.exports = {
       },
     },
     colors: {
-      "primary": "#FF6A00",
-      "secondary": "#FFA400",
-      "tertiary": "#FFD700",
-      "dark": "#1A1A1A",
-      "light": "#F5F5F5",
-      "white": "#FFFFFF",
-
-  },
+      primary: {
+        100: "#0061FF0A",
+        200: "#0061FF1A",
+        300: "#0061FF",
+      },
+      accent: {
+        100: "#FBFBFD",
+      },
+      black: {
+        DEFAULT: "#000000",
+        100: "#8C8E98",
+        200: "#666876",
+        300: "#191D31",
+      },
+      danger: "#F75555",
+    },
   plugins: [],
 };
