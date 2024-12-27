@@ -6,19 +6,27 @@ import {
   ScrollView,
   TouchableOpacity,
   useWindowDimensions,
+  Alert,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
+import { login } from "@/lib/appwrite";
 
 const SignIn = () => {
   const { width, height } = useWindowDimensions();
 
   const isLargeScreen = width >= 1024;
 
-  const handleSignIn = () => {
-    // Implement Google Sign In
+  const handleSignIn = async () => {
+    const result = await login();
+
+    if (result) {
+      console.log("Logged in successfully");
+    } else {
+      Alert.alert("Error", "Failed to login with Google");
+    }
   };
 
   return (
