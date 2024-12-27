@@ -42,11 +42,16 @@ const SignIn = () => {
             onPress={handleSignIn}
             className="bg-white shadow-md shadow-zinc-300 rounded-full w-full py-4 mt-5"
           >
-            <Image
-              source={icons.google}
-              className="w-5 h-5"
-              resizeMode="contain"
-            ></Image>
+            <View className="flex flex-row items-center justify-center">
+              <Image
+                source={icons.google}
+                className="w-6 h-6"
+                resizeMode="contain"
+              />
+              <Text className="text-lg font-rubik-medium text-black-300 ml-2">
+                Continue with Google
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
