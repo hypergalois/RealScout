@@ -71,3 +71,20 @@ export async function logout() {
     return false;
   }
 }
+
+export async function getUser() {
+  try {
+    const response = await account.get();
+
+    if (response.$id) {
+      const userAvatar = avatar.getInitials(response.name);
+      return {
+        ...response,
+        avatar: userAvatar.toString(),
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
