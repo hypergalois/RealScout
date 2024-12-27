@@ -26,15 +26,15 @@ const SignIn = () => {
         />
 
         <View className="px-10">
-          <Text className="text-base text-center uppercase font-rubik text-black-200">
+          <Text className="text-base text-center uppercase font-rubik text-black-200 mb-6 tracking-[0.1em]">
             Welcome to RealScout
           </Text>
-          <Text className="text-3xl font-rubik-bold text-black-300 text-center mt-2">
-            Let's Get You Closer to {"\n"}
-            <Text className="text-primary-300">Your Dream Home</Text>
+          <Text className="text-4xl font-rubik-bold text-black-300 text-center mt-2">
+            Let's Get You Closer To {"\n"}
+            <Text className="text-primary-300 text-4xl">Your Dream Home</Text>
           </Text>
 
-          <Text className="text-lg font-rubik text-center font-black-200 mt-12">
+          <Text className="text-lg font-rubik text-center font-black-200 mt-10">
             Login with Google
           </Text>
 
