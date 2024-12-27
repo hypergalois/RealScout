@@ -13,8 +13,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { login } from "@/lib/appwrite";
+import { useGlobalContext } from "@/lib/global-provider";
 
 const SignIn = () => {
+  const { user, loading, isLoggedIn, refetch } = useGlobalContext();
   const { width, height } = useWindowDimensions();
 
   const isLargeScreen = width >= 1024;
@@ -23,7 +25,8 @@ const SignIn = () => {
     const result = await login();
 
     if (result) {
-      console.log("Logged in successfully");
+      // console.log("Logged in successfully");
+      refetch();
     } else {
       Alert.alert("Error", "Failed to login with Google");
     }
