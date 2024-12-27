@@ -14,12 +14,17 @@ import images from "@/constants/images";
 import icons from "@/constants/icons";
 import { login } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
+import { Redirect } from "expo-router";
 
 const SignIn = () => {
   const { user, loading, isLoggedIn, refetch } = useGlobalContext();
   const { width, height } = useWindowDimensions();
 
   const isLargeScreen = width >= 1024;
+
+  if (!loading && isLoggedIn) {
+    return <Redirect href={"/"} />;
+  }
 
   const handleSignIn = async () => {
     const result = await login();
