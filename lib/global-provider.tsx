@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { useAppwrite } from "./useAppwrite";
 
 interface User {
   $id: string;
@@ -17,6 +18,12 @@ interface GlobalContextType {
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 export const GlobalProvider = ({ children}: { children: React.ReactNode }) => {
+
+    const {} = useAppwrite({
+        fn: getCurrentUser,
+        params: [],
+    });
+
     return (
         <GlobalContext.Provider value={{
         isLoggedIn: false,
