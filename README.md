@@ -25,48 +25,35 @@ RealScout permite a los usuarios explorar propiedades, ver detalles de cada inmu
 
 ## 🤸 Capturas de Pantalla
 
-### 1. Pantallas de Onboarding
+### 1. Login
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/onboarding1.png" alt="Onboarding 1" width="25%">
-  <img src="./img/onboarding2.png" alt="Onboarding 2" width="25%">
-  <img src="./img/onboarding3.png" alt="Onboarding 3" width="25%">
+  <img src="./img/1.jpeg" alt="Login" width="50%">
 </div>
 
-### 2. Páginas de Registro y Login
+### 2. Exploración de Propiedades
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/login.png" alt="Login" width="25%">
-  <img src="./img/register.png" alt="Registro" width="25%">
+  <img src="./img/1.PNG" alt="Home" width="50%">
 </div>
 
-### 3. Página de Exploración de Propiedades
+### 3. Detalles del Inmueble
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/explore1.png" alt="Explorar" width="25%">
-  <img src="./img/explore2.png" alt="Filtros y Resultados" width="25%">
+  <img src="./img/2.PNG" alt="Detalles 1" width="25%">
+  <img src="./img/3.PNG" alt="Detalles 2" width="25%">
 </div>
 
-### 4. Detalles del Inmueble
+### 4. Búsqueda Full-Text con Filtros
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/property1.png" alt="Detalles 1" width="25%">
-  <img src="./img/property2.png" alt="Detalles 2" width="25%">
-  <img src="./img/property3.png" alt="Galería" width="25%">
+  <img src="./img/4.PNG" alt="Contacto" width="25%">
 </div>
 
 ### 5. Perfil de Usuario
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/profile1.png" alt="Perfil" width="25%">
-  <img src="./img/profile2.png" alt="Opciones de Configuración" width="25%">
-</div>
-
-### 6. Contacto con Agentes y Ubicación
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="./img/contact1.png" alt="Contacto" width="25%">
-  <img src="./img/map.png" alt="Mapa de Ubicación" width="25%">
+  <img src="./img/5.PNG" alt="Perfil" width="25%">
 </div>
 
 ## 🚀 Próximas Funcionalidades
@@ -75,21 +62,3 @@ RealScout permite a los usuarios explorar propiedades, ver detalles de cada inmu
 - **Notificaciones**: Alertas para actualizaciones de propiedades y mensajes de agentes.
 - **Sistema de Reseñas**: Agrega y visualiza reseñas sobre inmuebles y agentes.
 - **Soporte Multilenguaje**: Disponibilidad en varios idiomas.
-
-## 🛠 Configuración del Proyecto
-
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/realscout.git
-   ```
-2. Instala las dependencias:
-   ```bash
-   npm install
-   ```
-3. Configura el archivo `.env` con las credenciales de **Appwrite**.
-4. Inicia la aplicación en Expo:
-   ```bash
-   expo start
-   ```
-
-¡Disfruta explorando RealScout! Si encuentras algún problema, no dudes en abrir un issue en el repositorio.
