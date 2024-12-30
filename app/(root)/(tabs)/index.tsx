@@ -10,11 +10,9 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text className="font-rubik-extrabold text-5xl">hola</Text>
-      <Link href={"/sign-in"}>Sign In</Link>
-      <Link href={"/explore"}>Explore</Link>
-      <Link href={"/profile"}>Profile</Link>
-      <Link href={"/properties/1"}>Property</Link>
+      <Text className="font-rubik-extrabold text-5xl text-center">
+        Welcome to RealScout
+      </Text>
     </View>
   );
 }
