@@ -1,11 +1,11 @@
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   Image,
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from "react-native";
 import { useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
@@ -24,6 +24,9 @@ import { getLatestProperties, getProperties } from "@/lib/appwrite";
 
 const Home = () => {
   const { user } = useGlobalContext();
+  const { width } = useWindowDimensions();
+
+  const isLargeScreen = width >= 1024; // Pantallas de iPad y web
 
   const params = useLocalSearchParams<{ query?: string; filter?: string }>();
 
@@ -60,58 +63,113 @@ const Home = () => {
     <SafeAreaView className="h-full bg-white">
       <FlatList
         data={properties}
-        numColumns={2}
+        numColumns={isLargeScreen ? 3 : 2}
         renderItem={({ item }) => (
-          <Card item={item} onPress={() => handleCardPress(item.$id)} />
+          <Card
+            item={item}
+            onPress={() => handleCardPress(item.$id)}
+            style={{
+              flex: 1,
+              marginHorizontal: isLargeScreen ? 15 : 10, // Separación horizontal
+              marginVertical: 10,
+            }}
+          />
         )}
         keyExtractor={(item) => item.$id}
-        contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-5 px-5"
+        contentContainerStyle={{
+          paddingBottom: 32,
+          paddingHorizontal: isLargeScreen ? 20 : 10,
+        }}
+        columnWrapperStyle={{
+          justifyContent: isLargeScreen ? "space-between" : "flex-start",
+        }}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           loading ? (
-            <ActivityIndicator size="large" className="text-primary-300 mt-5" />
+            <ActivityIndicator
+              size="large"
+              color="#007bff"
+              style={{ marginTop: 20 }}
+            />
           ) : (
             <NoResults />
           )
         }
         ListHeaderComponent={() => (
-          <View className="px-5">
-            <View className="flex flex-row items-center justify-between mt-5">
-              <View className="flex flex-row">
+          <View
+            style={{
+              paddingHorizontal: isLargeScreen ? 20 : 10,
+              marginTop: 20,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={{ uri: user?.avatar }}
-                  className="size-12 rounded-full"
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 24,
+                  }}
                 />
-
-                <View className="flex flex-col items-start ml-2 justify-center">
-                  <Text className="text-xs font-rubik text-black-100">
+                <View style={{ marginLeft: 10 }}>
+                  <Text style={{ fontSize: 12, color: "#6c757d" }}>
                     Good Morning
                   </Text>
-                  <Text className="text-base font-rubik-medium text-black-300">
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "600",
+                      color: "#343a40",
+                    }}
+                  >
                     {user?.name}
                   </Text>
                 </View>
               </View>
-              <Image source={icons.bell} className="size-6" />
+              <Image source={icons.bell} style={{ width: 24, height: 24 }} />
             </View>
 
             <Search />
 
-            <View className="my-5">
-              <View className="flex flex-row items-center justify-between">
-                <Text className="text-xl font-rubik-bold text-black-300">
+            <View style={{ marginTop: 20 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{ fontSize: 20, fontWeight: "bold", color: "#343a40" }}
+                >
                   Featured
                 </Text>
                 <TouchableOpacity>
-                  <Text className="text-base font-rubik-bold text-primary-300">
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      color: "#007bff",
+                    }}
+                  >
                     See all
                   </Text>
                 </TouchableOpacity>
               </View>
 
               {latestPropertiesLoading ? (
-                <ActivityIndicator size="large" className="text-primary-300" />
+                <ActivityIndicator
+                  size="large"
+                  color="#007bff"
+                  style={{ marginTop: 10 }}
+                />
               ) : !latestProperties || latestProperties.length === 0 ? (
                 <NoResults />
               ) : (
@@ -121,30 +179,47 @@ const Home = () => {
                     <FeaturedCard
                       item={item}
                       onPress={() => handleCardPress(item.$id)}
+                      style={{
+                        marginHorizontal: isLargeScreen ? 15 : 10, // Separación horizontal
+                      }}
                     />
                   )}
                   keyExtractor={(item) => item.$id}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  contentContainerClassName="flex gap-5 mt-5"
+                  contentContainerStyle={{
+                    marginTop: 10,
+                    paddingHorizontal: isLargeScreen ? 20 : 10,
+                  }}
                 />
               )}
             </View>
 
-            {/* <Button title="seed" onPress={seed} /> */}
-
-            <View className="mt-5">
-              <View className="flex flex-row items-center justify-between">
-                <Text className="text-xl font-rubik-bold text-black-300">
+            <View style={{ marginTop: 20 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{ fontSize: 20, fontWeight: "bold", color: "#343a40" }}
+                >
                   Our Recommendation
                 </Text>
                 <TouchableOpacity>
-                  <Text className="text-base font-rubik-bold text-primary-300">
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      color: "#007bff",
+                    }}
+                  >
                     See all
                   </Text>
                 </TouchableOpacity>
               </View>
-
               <Filters />
             </View>
           </View>
