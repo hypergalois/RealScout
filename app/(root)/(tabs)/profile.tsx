@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from "react-native";
 
 import { logout } from "@/lib/appwrite";
@@ -32,20 +33,37 @@ const SettingsItem = ({
 }: SettingsItemProp) => (
   <TouchableOpacity
     onPress={onPress}
-    className="flex flex-row items-center justify-between py-3"
+    style={{
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingVertical: 12,
+    }}
   >
-    <View className="flex flex-row items-center gap-3">
-      <Image source={icon} className="size-6" />
-      <Text className={`text-lg font-rubik-medium text-black-300 ${textStyle}`}>
+    <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+      <Image source={icon} style={{ width: 24, height: 24 }} />
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: "500",
+          color: "#343a40",
+          ...(textStyle ? { color: "#dc3545" } : {}),
+        }}
+      >
         {title}
       </Text>
     </View>
 
-    {showArrow && <Image source={icons.rightArrow} className="size-5" />}
+    {showArrow && (
+      <Image source={icons.rightArrow} style={{ width: 20, height: 20 }} />
+    )}
   </TouchableOpacity>
 );
 
 const Profile = () => {
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width >= 1024; // Detectar pantallas grandes (iPads y web)
+
   const { user, refetch } = useGlobalContext();
 
   const handleLogout = async () => {
@@ -59,42 +77,110 @@ const Profile = () => {
   };
 
   return (
-    <SafeAreaView className="h-full bg-white">
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="pb-32 px-7"
+        contentContainerStyle={{
+          paddingBottom: 32,
+          paddingHorizontal: isLargeScreen ? 40 : 20,
+        }}
       >
-        <View className="flex flex-row items-center justify-between mt-5">
-          <Text className="text-xl font-rubik-bold">Profile</Text>
-          <Image source={icons.bell} className="size-5" />
+        {/* Cabecera */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: isLargeScreen ? 24 : 20,
+              fontWeight: "700",
+              color: "#343a40",
+            }}
+          >
+            Profile
+          </Text>
+          <Image source={icons.bell} style={{ width: 20, height: 20 }} />
         </View>
 
-        <View className="flex flex-row justify-center mt-5">
-          <View className="flex flex-col items-center relative mt-5">
+        {/* Avatar */}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 30,
+          }}
+        >
+          <View style={{ alignItems: "center", position: "relative" }}>
             <Image
               source={{ uri: user?.avatar }}
-              className="size-44 relative rounded-full"
+              style={{
+                width: isLargeScreen ? 120 : 100,
+                height: isLargeScreen ? 120 : 100,
+                borderRadius: 60,
+              }}
             />
-            <TouchableOpacity className="absolute bottom-11 right-2">
-              <Image source={icons.edit} className="size-9" />
+            <TouchableOpacity
+              style={{
+                position: "absolute",
+                bottom: 10,
+                right: 10,
+                backgroundColor: "#ffffff",
+                borderRadius: 9999,
+                padding: 8,
+                elevation: 3,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowRadius: 5,
+              }}
+            >
+              <Image source={icons.edit} style={{ width: 28, height: 28 }} />
             </TouchableOpacity>
 
-            <Text className="text-2xl font-rubik-bold mt-2">{user?.name}</Text>
+            <Text
+              style={{
+                fontSize: isLargeScreen ? 22 : 20,
+                fontWeight: "700",
+                marginTop: 10,
+                color: "#343a40",
+              }}
+            >
+              {user?.name}
+            </Text>
           </View>
         </View>
 
-        <View className="flex flex-col mt-10">
+        {/* Opciones de Configuración */}
+        <View style={{ marginTop: 40 }}>
           <SettingsItem icon={icons.calendar} title="My Bookings" />
           <SettingsItem icon={icons.wallet} title="Payments" />
         </View>
 
-        <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+        <View
+          style={{
+            marginTop: 20,
+            borderTopWidth: 1,
+            borderTopColor: "#e9ecef",
+            paddingTop: 20,
+          }}
+        >
           {settings.slice(2).map((item, index) => (
             <SettingsItem key={index} {...item} />
           ))}
         </View>
 
-        <View className="flex flex-col border-t mt-5 pt-5 border-primary-200">
+        {/* Logout */}
+        <View
+          style={{
+            marginTop: 20,
+            borderTopWidth: 1,
+            borderTopColor: "#e9ecef",
+            paddingTop: 20,
+          }}
+        >
           <SettingsItem
             icon={icons.logout}
             title="Logout"
