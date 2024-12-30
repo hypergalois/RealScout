@@ -162,7 +162,6 @@ export async function getProperties({
   }
 }
 
-// write function to get property by id
 export async function getPropertyById({ id }: { id: string }) {
   try {
     const result = await databases.getDocument(
