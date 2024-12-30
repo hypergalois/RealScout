@@ -1,5 +1,37 @@
 import { Tabs } from "expo-router";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+
+import icons from "@/constants/icons";
+
+const TabIcon = ({
+  focused,
+  icon,
+  title,
+}: {
+  focused: boolean;
+  icon: any;
+  title: string;
+}) => {
+  return (
+    <View className="flex-1 mt-3 flex flex-col items-center">
+      <Image
+        source={icon}
+        tintColor={focused ? "#0061ff" : "#666876"}
+        resizeMode="contain"
+        className="size-6"
+      />
+      <Text
+        className={`text-xs w-full text-center mt-1 ${
+          focused
+            ? "text-primary-300 font-rubik-medium"
+            : "text-black-200 font-rubik"
+        }`}
+      >
+        {title}
+      </Text>
+    </View>
+  );
+};
 
 export default function TabsLayout() {
   return (
@@ -20,10 +52,8 @@ export default function TabsLayout() {
         options={{
           title: "Home",
           headerShown: false,
-          tabBarIcon: () => (
-            <View>
-              <Text>Home</Text>
-            </View>
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={icons.home} title="Home" focused={focused} />
           ),
         }}
       />
