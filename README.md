@@ -40,20 +40,20 @@ RealScout permite a los usuarios explorar propiedades, ver detalles de cada inmu
 ### 3. Detalles del Inmueble
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/2.PNG" alt="Detalles 1" width="25%">
-  <img src="./img/3.PNG" alt="Detalles 2" width="25%">
+  <img src="./img/2.PNG" alt="Detalles 1" width="49%">
+  <img src="./img/3.PNG" alt="Detalles 2" width="49%">
 </div>
 
 ### 4. Búsqueda Full-Text con Filtros
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/4.PNG" alt="Contacto" width="25%">
+  <img src="./img/4.PNG" alt="Contacto" width="50%">
 </div>
 
 ### 5. Perfil de Usuario
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./img/5.PNG" alt="Perfil" width="25%">
+  <img src="./img/5.PNG" alt="Perfil" width="50%">
 </div>
 
 ## 🚀 Próximas Funcionalidades
