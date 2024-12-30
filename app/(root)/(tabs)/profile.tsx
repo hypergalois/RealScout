@@ -13,6 +13,7 @@ import { logout } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
 
 import icons from "@/constants/icons";
+import { settings } from "@/constants/data";
 
 interface SettingsItemProp {
   icon: ImageSourcePropType;
@@ -85,6 +86,12 @@ const Profile = () => {
         <View className="flex flex-col mt-10">
           <SettingsItem icon={icons.calendar} title="My Bookings" />
           <SettingsItem icon={icons.wallet} title="Payments" />
+        </View>
+
+        <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+          {settings.slice(2).map((item, index) => (
+            <SettingsItem key={index} {...item} />
+          ))}
         </View>
 
         <View className="flex flex-col border-t mt-5 pt-5 border-primary-200">
