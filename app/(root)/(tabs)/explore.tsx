@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from "react-native";
 import { useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
@@ -20,6 +21,9 @@ import { getProperties } from "@/lib/appwrite";
 import { useAppwrite } from "@/lib/useAppwrite";
 
 const Explore = () => {
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width >= 1024; // Pantallas de iPad y web
+
   const params = useLocalSearchParams<{ query?: string; filter?: string }>();
 
   const {
@@ -48,44 +52,107 @@ const Explore = () => {
     <SafeAreaView className="h-full bg-white">
       <FlatList
         data={properties}
-        numColumns={2}
+        numColumns={isLargeScreen ? 3 : 2}
         renderItem={({ item }) => (
-          <Card item={item} onPress={() => handleCardPress(item.$id)} />
+          <Card
+            item={item}
+            onPress={() => handleCardPress(item.$id)}
+            style={{
+              flex: 1,
+              marginHorizontal: isLargeScreen ? 15 : 10,
+              marginVertical: 10,
+            }}
+          />
         )}
         keyExtractor={(item) => item.$id}
-        contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-5 px-5"
+        contentContainerStyle={{
+          paddingBottom: 32,
+          paddingHorizontal: isLargeScreen ? 20 : 10,
+        }}
+        columnWrapperStyle={{
+          justifyContent: isLargeScreen ? "space-between" : "flex-start",
+        }}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           loading ? (
-            <ActivityIndicator size="large" className="text-primary-300 mt-5" />
+            <ActivityIndicator
+              size="large"
+              color="#007bff"
+              style={{ marginTop: 20 }}
+            />
           ) : (
             <NoResults />
           )
         }
         ListHeaderComponent={() => (
-          <View className="px-5">
-            <View className="flex flex-row items-center justify-between mt-5">
+          <View
+            style={{
+              paddingHorizontal: isLargeScreen ? 20 : 10,
+              marginTop: 20,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <TouchableOpacity
                 onPress={() => router.back()}
-                className="flex flex-row bg-primary-200 rounded-full size-11 items-center justify-center"
+                style={{
+                  flexDirection: "row",
+                  backgroundColor: "#d1e7ff",
+                  borderRadius: 9999,
+                  width: 44,
+                  height: 44,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                <Image source={icons.backArrow} className="size-5" />
+                <Image
+                  source={icons.backArrow}
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
               </TouchableOpacity>
 
-              <Text className="text-base mr-2 text-center font-rubik-medium text-black-300">
+              <Text
+                style={{
+                  flex: 1,
+                  textAlign: "center",
+                  fontSize: isLargeScreen ? 18 : 16,
+                  fontWeight: "500",
+                  color: "#343a40",
+                }}
+              >
                 Search for Your Ideal Home
               </Text>
-              <Image source={icons.bell} className="w-6 h-6" />
+              <Image
+                source={icons.bell}
+                style={{
+                  width: isLargeScreen ? 28 : 24,
+                  height: isLargeScreen ? 28 : 24,
+                }}
+              />
             </View>
 
             <Search />
 
-            <View className="mt-5">
+            <View style={{ marginTop: 20 }}>
               <Filters />
 
-              <Text className="text-xl font-rubik-bold text-black-300 mt-5">
-                Found {properties?.length} Properties
+              <Text
+                style={{
+                  fontSize: isLargeScreen ? 22 : 18,
+                  fontWeight: "bold",
+                  color: "#343a40",
+                  marginTop: 20,
+                }}
+              >
+                Found {properties?.length || 0} Properties
               </Text>
             </View>
           </View>
